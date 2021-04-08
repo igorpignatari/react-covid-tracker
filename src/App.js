@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { createGlobalStyle } from "styled-components";
+import { ContainerInfoBoxes } from "./components/ContainerInfoBoxes";
+import { Header } from "./components/Header";
+import { CountryProvider } from "./contexts/CountryContext";
+import { TableCountries } from "./components/Table";
+import { Container } from "./components/Container";
+import { CovidMap } from "./components/Map";
+import "leaflet/dist/leaflet.css";
 
-function App() {
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    background: #e9e9e9;
+    font-family: 'Inter', sans-serif;
+  }
+`;
+
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <CountryProvider>
+        <Container>
+          <CovidMap />
+          <Header />
+          <ContainerInfoBoxes />
+          <TableCountries />
+        </Container>
+      </CountryProvider>
+    </>
   );
 }
-
-export default App;
